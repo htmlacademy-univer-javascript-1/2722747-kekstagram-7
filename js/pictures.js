@@ -16,10 +16,12 @@ const renderPictures = (photos) => {
     picture.querySelector('.picture__likes').textContent = likes;
     picture.querySelector('.picture__comments').textContent = comments.length;
 
-    picture.addEventListener('click', (evt) => {
+    const onPictureClick = (evt) => {
       evt.preventDefault();
       openBigPicture(photo);
-    });
+    };
+
+    picture.addEventListener('click', onPictureClick);
 
     fragment.append(picture);
   });
