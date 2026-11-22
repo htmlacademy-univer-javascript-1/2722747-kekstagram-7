@@ -45,11 +45,25 @@ function onDocumentKeydown(evt) {
   }
 }
 
+const getCommentsWord = (count) => {
+  const lastTwo = count % 100;
+  const last = count % 10;
+
+  if (lastTwo >= 11 && lastTwo <= 14) {
+    return 'комментариев';
+  }
+  if (last === 1) {
+    return 'комментария';
+  }
+  return 'комментариев';
+};
+
 const openBigPicture = ({url, description, likes, comments}) => {
   bigPictureImage.src = url;
   bigPictureImage.alt = description;
   bigPicture.querySelector('.likes-count').textContent = likes;
   bigPicture.querySelector('.comments-count').textContent = comments.length;
+  bigPicture.querySelector('.comments-word').textContent = getCommentsWord(comments.length);
   bigPicture.querySelector('.social__caption').textContent = description;
   currentComments = comments;
   shownCommentsCount = 0;
@@ -62,7 +76,10 @@ const openBigPicture = ({url, description, likes, comments}) => {
   document.addEventListener('keydown', onDocumentKeydown);
 };
 
-closeButton.addEventListener('click', closeBigPicture);
-commentsLoader.addEventListener('click', renderComments);
+const onCloseButtonClick = () => closeBigPicture();
+const onCommentsLoaderClick = () => renderComments();
+
+closeButton.addEventListener('click', onCloseButtonClick);
+commentsLoader.addEventListener('click', onCommentsLoaderClick);
 
 export {openBigPicture};
