@@ -1,3 +1,6 @@
+import {resetScale} from './scale.js';
+import {resetEffects} from './effects.js';
+
 const form = document.querySelector('.img-upload__form');
 const fileInput = form.querySelector('.img-upload__input');
 const overlay = form.querySelector('.img-upload__overlay');
@@ -24,6 +27,8 @@ const closeForm = () => {
   overlay.classList.add('hidden');
   document.body.classList.remove('modal-open');
   form.reset();
+  resetScale();
+  resetEffects();
   pristine.reset();
   document.removeEventListener('keydown', onDocumentKeydown);
 };
